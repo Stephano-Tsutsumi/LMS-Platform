@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import NavItems from './NavItems'
 
 const Navbar = () => {
@@ -18,7 +19,21 @@ const Navbar = () => {
         </Link>
         <div className='flex items-center gap-8'>
             <NavItems />
-            <p>Sign In</p>
+            <SignedOut>
+              <SignInButton mode="modal">
+                <SignInButton>
+                    <button className='btn-signin'>Sign In</button>
+                </SignInButton>
+              </SignInButton>
+              {/* <SignUpButton mode="modal">
+                <button className="text-sm font-medium bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                  Sign Up
+                </button>
+              </SignUpButton> */}
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
         </div>
     </nav>
   )
