@@ -9,13 +9,12 @@ import {
 } from "./ui/select";
 import { subjects } from "@/constants";
 import { useRouter } from "next/navigation";
-import { useSearchParams, usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { formUrlQuery, removeKeysFromUrlQuery } from "@jsmastery/utils";
 
 const SubjectFilter = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const pathname = usePathname()
     const query = searchParams.get("subject") || "";
 
     const [subject, setSubject] = useState(query);
@@ -35,7 +34,7 @@ const SubjectFilter = () => {
             });
         }
         router.push(newUrl, { scroll: false });
-    }, [subject, router, searchParams, pathname]);
+    }, [subject]);
 
     return (
         <Select onValueChange={setSubject} value={subject}>

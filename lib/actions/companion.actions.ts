@@ -42,5 +42,18 @@ export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic }:
 
 }
 
+export const getCompanion = async(id: string) => {
+    const supabase = createSupabaseClient();
+
+    const { data, error } = await supabase
+    .from('companions')
+    .select()
+    .eq('id', id)
+
+    if(error) return console.log(error)
+    
+    return data[0]
+}
+
 //Server actions tapping into DB
 // All server actions are run on edge meaning their is not a consistant connection to the server
