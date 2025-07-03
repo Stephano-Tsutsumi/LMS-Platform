@@ -96,5 +96,18 @@ export const getUserSessions = async (userId: string, limit = 10) => {
     return data.map(({ companions }) => companions);
 }
 
+export const getUserCompanions = async (userId: string) => {
+    const supabase = createSupabaseClient();
+    const { data, error } = await supabase
+        .from('companions')
+        .select()
+        .eq('author', userId)
+
+    if(error) throw new Error(error.message);
+
+    return data;
+}
+
+
 //Server actions tapping into DB
 // All server actions are run on edge meaning their is not a consistant connection to the server
